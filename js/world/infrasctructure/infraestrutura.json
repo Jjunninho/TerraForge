@@ -1,0 +1,12 @@
+{
+  "infraestrutura": [
+    { "id": "estrada",       "nome": "Estrada",        "icone": "icon-planicie",   "arquivo": "js/world/infrastructure/data/estrada.json" },
+    { "id": "ponte_madeira", "nome": "Ponte Madeira",  "icone": "icon-planicie",   "arquivo": "js/world/infrastructure/data/ponte_madeira.json" },
+    { "id": "farol",         "nome": "Farol",          "icone": "icon-neve",       "arquivo": "js/world/infrastructure/data/farol.json" },
+    { "id": "bandeira",      "nome": "Bandeira",       "icone": "icon-planicie",   "arquivo": "js/world/infrastructure/data/bandeira.json" },
+    { "id": "fogueira",      "nome": "Fogueira",       "icone": "icon-deserto",    "arquivo": "js/world/infrastructure/data/fogueira.json" },
+    { "id": "poco",          "nome": "Poço",           "icone": "icon-pantano",    "arquivo": "js/world/infrastructure/data/poco.json" },
+    { "id": "estatua",       "nome": "Estátua",        "icone": "icon-montanhas",  "arquivo": "js/world/infrastructure/data/estatua.json" },
+    { "id": "monumento",     "nome": "Monumento",      "icone": "icon-montanhas",  "arquivo": "js/world/infrastructure/data/monumento.json" }
+  ]
+}

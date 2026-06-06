@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>TerraForge | Gerador de Mundos Procedurais 3D</title>
+    
+    <!-- Fontes e estilo base -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0c12, #030507);
+            font-family: 'Inter', sans-serif;
+            color: #eef4ff;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* Grid de fundo futurista */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 128, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 128, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 30px 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* cabeçalho */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 0 25px;
+            border-bottom: 2px solid rgba(0, 255, 200, 0.4);
+            margin-bottom: 30px;
+        }
+        .logo h1 {
+            font-family: 'VT323', monospace;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #b3ffd0, #3eff9e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(62,255,158,0.3);
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #7e8c9e;
+            letter-spacing: 1px;
+        }
+        .badge {
+            background: rgba(0, 255, 170, 0.15);
+            padding: 8px 16px;
+            border-radius: 100px;
+            border-left: 3px solid #3eff9e;
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+        }
+
+        /* hero */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0 70px;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 280px;
+        }
+        .hero-text h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffffff, #8affc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-text .highlight {
+            color: #3eff9e;
+            text-shadow: 0 0 6px #2ecc71;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #cbd5e6;
+            margin-bottom: 30px;
+            max-width: 550px;
+        }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(95deg, #1f8a4c, #0f6a38);
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.5rem;
+            font-family: 'VT323', monospace;
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(62,255,158,0.5);
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(95deg, #2caa5c, #158347);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.5), 0 0 12px #3eff9e;
+        }
+        .hero-canvas {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 28px;
+            backdrop-filter: blur(2px);
+            padding: 12px;
+            border: 1px solid rgba(62, 255, 158, 0.4);
+            box-shadow: 0 20px 35px -12px black;
+        }
+        canvas#terrain-preview {
+            width: 100%;
+            height: auto;
+            background: #101820;
+            border-radius: 20px;
+            display: block;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+        }
+
+        /* Seção propaganda */
+        .section-title {
+            font-size: 2.2rem;
+            font-family: 'VT323', monospace;
+            margin: 60px 0 30px 0;
+            border-left: 6px solid #3eff9e;
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+        .feature-card {
+            background: rgba(12, 18, 28, 0.75);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(62, 255, 158, 0.25);
+            border-radius: 28px;
+            padding: 24px 20px;
+            transition: all 0.2s;
+        }
+        .feature-card:hover {
+            border-color: #3eff9e;
+            transform: translateY(-6px);
+            background: rgba(18, 28, 40, 0.85);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.6);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .feature-card h3 {
+            font-size: 1.7rem;
+            font-family: 'VT323', monospace;
+            color: #caffdd;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: #b4c4dc;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Destaque do BUILDER */
+        .builder-spotlight {
+            background: linear-gradient(125deg, rgba(30, 50, 40, 0.9), rgba(10, 20, 18, 0.9));
+            border-radius: 40px;
+            padding: 40px 35px;
+            margin: 40px 0 30px;
+            border: 1px solid #ffd966;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .builder-spotlight::before {
+            content: "⚙️";
+            font-size: 140px;
+            opacity: 0.08;
+            position: absolute;
+            bottom: -20px;
+            right: 0;
+            pointer-events: none;
+        }
+        .builder-spotlight h3 {
+            font-size: 2rem;
+            font-family: 'VT323', monospace;
+            color: #ffdf8c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .builder-spotlight p {
+            font-size: 1.05rem;
+            max-width: 80%;
+            color: #e0e8f5;
+            margin-bottom: 15px;
+        }
+        .builder-features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 20px;
+        }
+        .builder-feature-item {
+            background: rgba(0,0,0,0.5);
+            border-radius: 60px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-family: monospace;
+            border: 1px solid #ffb347;
+        }
+        .info-note {
+            background: #1e2a2e80;
+            border-radius: 20px;
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+
+        /* rodapé */
+        footer {
+            margin-top: 70px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(62, 255, 158, 0.2);
+            text-align: center;
+            color: #7f8c9a;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 780px) {
+            .container { padding: 15px 20px; }
+            .hero-text h2 { font-size: 2.2rem; }
+            .builder-spotlight p { max-width: 100%; }
+            .cta-button { font-size: 1.2rem; padding: 12px 24px; }
+        }
+
+        /* animação suave */
+        .glow-text {
+            text-shadow: 0 0 6px rgba(62,255,158,0.5);
+        }
+        button, .cta-button {
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <h1>✦ TERRAFORGE ✦</h1>
+            <p>engine de mundos infinitos · geração procedural 3D</p>
+        </div>
+        <div class="badge">
+            🌍 v.Procedural + Builder
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-text">
+            <h2>Dê vida a <span class="highlight">mundos além da imaginação</span></h2>
+            <p>Montanhas colossais, abissais oceanos, biomas místicos e climas dinâmicos — cada mundo é único, gerado por algoritmos de ruído avançado e simulação de fluidos.</p>
+            <a href="./index_md_v6_1.html" class="cta-button">
+                🌌 GERAR MEU MUNDO AGORA
+                <span>→</span>
+            </a>
+            <div style="margin-top: 24px;">
+                <span style="background: #0f2120; padding: 6px 12px; border-radius: 32px; font-size: 0.75rem;">🎲 SEED editável · ciclos dia/noite · +1 milhão de combinações</span>
+            </div>
+        </div>
+        <div class="hero-canvas">
+            <canvas id="terrain-preview" width="500" height="500" style="width:100%; height:auto; max-width:500px; aspect-ratio:1/1"></canvas>
+            <div style="text-align: center; margin-top: 10px; font-size: 12px; font-family: monospace;">🌄 pré-visualização procedural viva</div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO DE RECURSOS PRINCIPAIS (propaganda) -->
+    <div class="section-title">⚡ POSSIBILIDADES INFINITAS</div>
+    <div class="grid-features">
+        <div class="feature-card">
+            <div class="feature-icon">🏔️</div>
+            <h3>Terreno Vivo</h3>
+            <p>Esculpido por múltiplas camadas de ruído: montanhas, cânions, vales profundos, planícies e abismos. Relevo dinâmico e realista.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Biomas Lendários</h3>
+            <p>Floresta, Selva, Tundra, Deserto, Corrupção Carmesim, Hallow brilhante e até bioma de Cogumelos gigantes.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💧</div>
+            <h3>Fluidos + Lava</h3>
+            <p>Oceano dinâmico, lagos, rios serpenteantes, lava incandescente e misterioso "Mel" — cada fluido com comportamento único.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌞🌙</div>
+            <h3>Ciclo do Dia & Clima</h3>
+            <p>Amanhecer dourado, noite estrelada, auroras boreais, chuva, neve, névoa densa e tempestades — tudo em tempo real.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🗺️</div>
+            <h3>Mapa Salvável</h3>
+            <p>Exporte seu planeta .planet / JSON, compartilhe com amigos ou carregue novamente. Estatísticas completas: altura máxima, área coberta, chunks gerados.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Modos de Geração</h3>
+            <p>Manual (você escolhe o estilo: montanhas, lagos, etc), Assistida ou Caos total — combinações infinitas com sliders de escala, intensidade e blend.</p>
+        </div>
+    </div>
+
+    <!-- DESTAQUE DO BUILDER (SEM LINK DIRETO, APENAS PROPAGANDA) -->
+    <div class="builder-spotlight">
+        <h3>🔨 EDITOR DE MUNDO COMPLETO — BUILDER</h3>
+        <p>Uma ferramenta profissional de escultura, pintura e construção que integra perfeitamente com o mundo procedural. <strong>Disponível para lapidar cada detalhe do seu planeta!</strong></p>
+        <div class="builder-features-list">
+            <span class="builder-feature-item">✏️ Escultura de terreno (Elevar / Rebaixar / Suavizar)</span>
+            <span class="builder-feature-item">🎨 Pintura de texturas e biomas por pincel</span>
+            <span class="builder-feature-item">🏠 Construção de estruturas (casas, castelos, pontes)</span>
+            <span class="builder-feature-item">🌲 Objetos: árvores, rochas, minerais e decoração</span>
+            <span class="builder-feature-item">📐 Transform Gizmo: mover, rotacionar, escalar objetos</span>
+            <span class="builder-feature-item">💾 Sistema de salvamento e carregamento local</span>
+            <span class="builder-feature-item">🌀 Undo/Redo, espelhamento, alinhamento de grade</span>
+        </div>
+        <div class="info-note">
+            ⚙️ O Builder funciona em janela separada, carregando o planeta gerado. Gere seu mundo no Gerador Procedural e depois refine no Editor avançado!
+        </div>
+    </div>
+
+    <!-- Seção extra: integração + criatividade -->
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; margin: 30px 0 20px;">
+        <div style="flex:1; min-width: 200px;">
+            <h3 style="font-family:VT323; font-size:1.7rem;">🎛️ Controle absoluto</h3>
+            <p style="color:#bdd">Ajuste a seed, mistura de biomas, escala do terreno e intensidade. Cada clique no botão REROLL recria um universo único. Use o modo aleatório para surpresas ou combine elementos individuais (rios + montanhas + floresta, etc).</p>
+        </div>
+        <div style="flex:1; min-width: 200px;">
+            <h3 style="font-family:VT323; font-size:1.7rem;">📡 Telemetria em tempo real</h3>
+            <p style="color:#bdd">Visualize altitude, profundidade, alertas de bedrock e limite atmosférico, distâncias de segurança. Perfeito para exploradores e construtores.</p>
+        </div>
+        <div style="flex:1; min-width: 200px;">
+            <h3 style="font-family:VT323; font-size:1.7rem;">🧬 Bio-diversidade</h3>
+            <p style="color:#bdd">Biomas interagem com a altitude e umidade: Hallow brilha à noite, Corrupção se espalha visualmente, e cogumelos gigantes surgem em cavernas profundas.</p>
+        </div>
+    </div>
+
+    <!-- Chamada final (apenas para index_md_v6_1) -->
+    <div style="text-align: center; margin: 50px 0 20px;">
+        <a href="./index_md_v6_1.html" class="cta-button" style="background: linear-gradient(95deg, #2c5f8a, #1a3f5a); box-shadow: 0 0 0 1px #5bc0ff;">
+            🌟 EXPERIMENTE AGORA O GERADOR 🌟
+        </a>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #92a5c2;">✨ Sem instalação, compatível com todos os navegadores modernos. Crie, exporte e evolua seu planeta!</p>
+    </div>
+
+    <footer>
+        <p>🌍 TerraForge — Motor de Mundo Procedural 3D | Tecnologia Three.js + WebGL | Ruído Perlin + Simulação de Biomas</p>
+        <p style="margin-top: 10px;">Projeto de código aberto para criadores de mundos, arquitetos digitais e exploradores da fantasia.</p>
+        <p style="margin-top: 14px;">🔗 Acesse o <strong>Gerador de Mundo</strong> para dar o primeiro passo — depois, refine seu território no <strong>Editor Completo Builder</strong>.</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // Canvas animado / preview procedural para propaganda
+        const canvas = document.getElementById('terrain-preview');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let width = 500, height = 500;
+        const resizeCanvas = () => {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const size = Math.min(rect.width, 400);
+            canvas.style.width = `${size}px`;
+            canvas.style.height = `${size}px`;
+            canvas.width = size;
+            canvas.height = size;
+            width = size;
+            height = size;
+            drawPreview(performance.now() / 1000);
+        };
+        window.addEventListener('resize', resizeCanvas);
+        
+        // ruído procedural simples para terreno animado
+        let timeOffset = 0;
+        function noise(x, y, t) {
+            // ruído senoidal simples mas com padrão orgânico
+            return Math.sin(x * 0.12 + t) * Math.cos(y * 0.12 + t * 0.7) +
+                   0.5 * Math.sin(x * 0.35 + t * 1.3) * Math.sin(y * 0.25 - t * 0.9) +
+                   0.3 * Math.sin((x * 0.8 + y * 0.5) * 1.2 + t * 1.8);
+        }
+        
+        function drawPreview(now) {
+            if (!ctx || width === 0) return;
+            const t = now * 0.6;
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const nx = (x / width) * 5.0;
+                    const ny = (y / height) * 5.0;
+                    let elev = noise(nx, ny, t);
+                    elev = (elev + 1.2) / 2.4; // entre 0 e 1
+                    // simular biomas
+                    let r, g, b;
+                    if (elev < 0.3) {  // água profunda
+                        r = 20 + Math.sin(nx*5 + t)*8;
+                        g = 60 + Math.cos(ny*4 + t)*12;
+                        b = 140 + Math.sin((nx+ny)*3 + t)*20;
+                    } else if (elev < 0.45) { // areia / praia
+                        r = 210 + Math.sin(nx*12)*15;
+                        g = 180 + Math.cos(ny*10)*12;
+                        b = 100 + Math.sin((nx+ny)*6)*8;
+                    } else if (elev < 0.7) { // grama / floresta
+                        let mix = (elev-0.45)/0.25;
+                        r = 40 + Math.sin(nx*12 + t)*12;
+                        g = 100 + Math.sin(ny*14 + t*1.2)*30;
+                        b = 40 + Math.cos((nx+ny)*7)*12;
+                    } else if (elev < 0.85) { // montanha / rocha
+                        r = 110 + Math.sin(nx*20)*15;
+                        g = 90 + Math.cos(ny*18)*12;
+                        b = 70 + Math.sin((nx+ny)*10)*10;
+                    } else { // neve / pico
+                        r = 240 + Math.sin(nx*15 + t)*8;
+                        g = 245 + Math.cos(ny*15)*8;
+                        b = 255;
+                    }
+                    // cor para bioma especial (toque misterioso)
+                    if (Math.abs(Math.sin(nx*3.7 + ny*2.3 + t*0.9)) > 0.85 && elev > 0.5) {
+                        r = r*0.5 + 180;
+                        g = g*0.4 + 100;
+                        b = b*0.3 + 220;
+                    }
+                    const idx = (y * width + x) * 4;
+                    data[idx] = Math.min(255, r);
+                    data[idx+1] = Math.min(255, g);
+                    data[idx+2] = Math.min(255, b);
+                    data[idx+3] = 255;
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+            
+            // desenhar grid ou sol / lua
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.beginPath();
+            ctx.arc(width-35, 35, 22, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(255, 200, 100, ${0.5+Math.sin(t)*0.2})`;
+            ctx.fill();
+            ctx.restore();
+            
+            requestAnimationFrame((time) => drawPreview(time / 1000));
+        }
+        
+        resizeCanvas();
+        drawPreview(performance.now() / 1000);
+        
+        // opcional: evento clique no canvas para mostrar curiosidade
+        canvas.addEventListener('click', () => {
+            const messages = [
+                "🌋 Montanhas podem atingir mais de 200 blocos de altura!",
+                "💧 O oceano cobre ~60% da superfície em mundos típicos",
+                "✨ Bioma Hallow brilha no escuro e gera cristais mágicos",
+                "🪨 O Builder permite escultura com pincel de até 50 blocos!",
+                "🌲 Cada árvore é posicionada proceduralmente baseada no bioma",
+                "🧙‍♂️ Você pode exportar o planeta e recriar no modo construção"
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const notif = document.createElement('div');
+            notif.innerText = randomMsg;
+            notif.style.position = 'fixed';
+            notif.style.bottom = '20px';
+            notif.style.left = '20px';
+            notif.style.backgroundColor = '#0a1f1c';
+            notif.style.color = '#b3ffcf';
+            notif.style.padding = '12px 18px';
+            notif.style.borderRadius = '40px';
+            notif.style.fontFamily = 'VT323, monospace';
+            notif.style.fontSize = '1rem';
+            notif.style.border = '1px solid #3eff9e';
+            notif.style.zIndex = '9999';
+            notif.style.backdropFilter = 'blur(6px)';
+            document.body.appendChild(notif);
+            setTimeout(() => { notif.style.opacity = '0'; setTimeout(() => notif.remove(), 800); }, 2200);
+        });
+    })();
+</script>
+
+<!-- Adição de pequeno manifesto visual -->
+<style>
+    ::selection {
+        background: #3eff9e;
+        color: #031010;
+    }
+    a {
+        text-decoration: none;
+    }
+    .cta-button {
+        text-decoration: none;
+        display: inline-flex;
+    }
+    .builder-feature-item {
+        transition: 0.1s linear;
+    }
+    .builder-feature-item:hover {
+        background: #ffb34730;
+        border-color: #ffdf8c;
+    }
+    .feature-card {
+        transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+</style>
+</body>
+</html>

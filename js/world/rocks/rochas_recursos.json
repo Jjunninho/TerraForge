@@ -1,0 +1,12 @@
+{
+  "rochas_recursos": [
+    { "id": "rocha_grande",       "nome": "Rocha Grande",       "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/rocha_grande.json" },
+    { "id": "rocha_media",        "nome": "Rocha Média",        "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/rocha_media.json" },
+    { "id": "rocha_pequena",      "nome": "Rocha Pequena",      "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/rocha_pequena.json" },
+    { "id": "minerio_ferro",      "nome": "Minério Ferro",      "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/minerio_ferro.json" },
+    { "id": "minerio_ouro",       "nome": "Minério Ouro",       "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/minerio_ouro.json" },
+    { "id": "cristal",            "nome": "Cristal",            "icone": "icon-hallow",     "arquivo": "js/world/rocks/data/cristal.json" },
+    { "id": "arvore_petrificada", "nome": "Árvore Petrificada", "icone": "icon-floresta",   "arquivo": "js/world/rocks/data/arvore_petrificada.json" },
+    { "id": "fossil",             "nome": "Fóssil",             "icone": "icon-montanhas",  "arquivo": "js/world/rocks/data/fossil.json" }
+  ]
+}

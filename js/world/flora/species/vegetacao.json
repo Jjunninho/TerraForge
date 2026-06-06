@@ -1,0 +1,12 @@
+{
+  "vegetacao": [
+    { "id": "pinheiro",   "nome": "Pinheiro",   "icone": "icon-floresta",  "arquivo": "js/world/flora/species/pinheiro.json" },
+    { "id": "carvalho",   "nome": "Carvalho",   "icone": "icon-selva",     "arquivo": "js/world/flora/species/carvalho.json" },
+    { "id": "macieira",   "nome": "Macieira",   "icone": "icon-floresta",  "arquivo": "js/world/flora/species/macieira.json" },
+    { "id": "palmeira",   "nome": "Palmeira",   "icone": "icon-deserto",   "arquivo": "js/world/flora/species/palmeira.json" },
+    { "id": "arbusto",    "nome": "Arbusto",    "icone": "icon-floresta",  "arquivo": "js/world/flora/species/arbusto.json" },
+    { "id": "flores",     "nome": "Flores",     "icone": "icon-floresta",  "arquivo": "js/world/flora/species/flores.json" },
+    { "id": "cogumelo",   "nome": "Cogumelo",   "icone": "icon-cogumelos", "arquivo": "js/world/flora/species/cogumelo.json" },
+    { "id": "samambaia",  "nome": "Samambaia",  "icone": "icon-selva",     "arquivo": "js/world/flora/species/samambaia.json" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "estruturas": [
+    { "id": "casa_madeira", "nome": "Casa Madeira", "icone": "icon-floresta",   "arquivo": "js/world/structures/data/casa_madeira.json" },
+    { "id": "casa_pedra",   "nome": "Casa Pedra",   "icone": "icon-montanhas",  "arquivo": "js/world/structures/data/casa_pedra.json" },
+    { "id": "castelo",      "nome": "Castelo",      "icone": "icon-montanhas",  "arquivo": "js/world/structures/data/castelo.json" },
+    { "id": "torre",        "nome": "Torre",        "icone": "icon-montanhas",  "arquivo": "js/world/structures/data/torre.json" },
+    { "id": "ponte",        "nome": "Ponte",        "icone": "icon-planicie",   "arquivo": "js/world/structures/data/ponte.json" },
+    { "id": "muro",         "nome": "Muro",         "icone": "icon-montanhas",  "arquivo": "js/world/structures/data/muro.json" },
+    { "id": "portao",       "nome": "Portão",       "icone": "icon-montanhas",  "arquivo": "js/world/structures/data/portao.json" },
+    { "id": "escada",       "nome": "Escada",       "icone": "icon-planicie",   "arquivo": "js/world/structures/data/escada.json" }
+  ]
+}

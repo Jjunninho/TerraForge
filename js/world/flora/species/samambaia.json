@@ -1,0 +1,5 @@
+{
+  "blocks": [
+    { "position": { "x": 0, "y": 0.2, "z": 0 }, "color": "#388E3C", "type": "sphere", "scale": 0.6 }
+  ]
+}

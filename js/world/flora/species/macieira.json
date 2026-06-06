@@ -1,0 +1,40 @@
+{
+  "blocks": [
+    { "position": { "x": 0, "y": 0.5, "z": 0 }, "color": "#5D4037", "type": "cylinder", "scale": 1.2 },
+    { "position": { "x": 0, "y": 1.8, "z": 0 }, "color": "#5D4037", "type": "cylinder", "scale": 1.1 },
+    { "position": { "x": 0, "y": 3.0, "z": 0 }, "color": "#5D4037", "type": "cylinder", "scale": 0.9 },
+
+    { "position": { "x": -0.5, "y": 3.8, "z": 0 }, "color": "#2E7D32", "type": "sphere", "scale": 1.5 },
+    { "position": { "x": 0.5, "y": 3.8, "z": 0 }, "color": "#2E7D32", "type": "sphere", "scale": 1.5 },
+    { "position": { "x": 0, "y": 4.5, "z": -0.5 }, "color": "#43A047", "type": "sphere", "scale": 1.3 },
+    { "position": { "x": 0, "y": 4.5, "z": 0.5 }, "color": "#43A047", "type": "sphere", "scale": 1.3 },
+    { "position": { "x": 0, "y": 5.2, "z": 0 }, "color": "#66BB6A", "type": "sphere", "scale": 1.8 },
+
+    { "position": { "x": -0.5, "y": 4.55, "z": 0 }, "color": "#FF6B6B", "type": "sphere", "scale": 0.25 },
+    { "position": { "x": -1.25, "y": 3.8, "z": 0 }, "color": "#FFA726", "type": "sphere", "scale": 0.3 },
+    { "position": { "x": -0.5, "y": 3.8, "z": 0.75 }, "color": "#FFD700", "type": "sphere", "scale": 0.28 },
+    { "position": { "x": -0.5, "y": 3.8, "z": -0.75 }, "color": "#FF4081", "type": "sphere", "scale": 0.26 },
+
+    { "position": { "x": 0.5, "y": 4.55, "z": 0 }, "color": "#FF5722", "type": "sphere", "scale": 0.3 },
+    { "position": { "x": 1.25, "y": 3.8, "z": 0 }, "color": "#FF6B6B", "type": "sphere", "scale": 0.25 },
+    { "position": { "x": 0.5, "y": 3.8, "z": 0.75 }, "color": "#7B1FA2", "type": "sphere", "scale": 0.27 },
+    { "position": { "x": 0.5, "y": 3.8, "z": -0.75 }, "color": "#FF9800", "type": "sphere", "scale": 0.29 },
+
+    { "position": { "x": 0, "y": 5.15, "z": -0.5 }, "color": "#F44336", "type": "sphere", "scale": 0.22 },
+    { "position": { "x": 0.65, "y": 4.5, "z": -0.5 }, "color": "#FFEB3B", "type": "sphere", "scale": 0.24 },
+    { "position": { "x": 0, "y": 4.5, "z": 0.15 }, "color": "#FFA726", "type": "sphere", "scale": 0.21 },
+    { "position": { "x": -0.65, "y": 4.5, "z": -0.5 }, "color": "#FF6B6B", "type": "sphere", "scale": 0.23 },
+
+    { "position": { "x": 0, "y": 5.15, "z": 0.5 }, "color": "#FF4081", "type": "sphere", "scale": 0.26 },
+    { "position": { "x": 0.65, "y": 4.5, "z": 0.5 }, "color": "#4CAF50", "type": "sphere", "scale": 0.28 },
+    { "position": { "x": 0, "y": 4.5, "z": 1.15 }, "color": "#FF5722", "type": "sphere", "scale": 0.25 },
+    { "position": { "x": -0.65, "y": 4.5, "z": 0.5 }, "color": "#FFD700", "type": "sphere", "scale": 0.27 },
+
+    { "position": { "x": 0, "y": 6.1, "z": 0 }, "color": "#FF4500", "type": "sphere", "scale": 0.35 },
+    { "position": { "x": 0.9, "y": 5.2, "z": 0 }, "color": "#FF6B6B", "type": "sphere", "scale": 0.32 },
+    { "position": { "x": 0, "y": 5.2, "z": 0.9 }, "color": "#FF6347", "type": "sphere", "scale": 0.3 },
+    { "position": { "x": -0.9, "y": 5.2, "z": 0 }, "color": "#FFD700", "type": "sphere", "scale": 0.33 },
+    { "position": { "x": 0, "y": 5.2, "z": -0.9 }, "color": "#FF9800", "type": "sphere", "scale": 0.31 },
+    { "position": { "x": 0.64, "y": 5.2, "z": 0.64 }, "color": "#FF4081", "type": "sphere", "scale": 0.28 }
+  ]
+}

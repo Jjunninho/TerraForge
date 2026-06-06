@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Gerador de Mundo Procedural 3D - Sistema Planetário</title>
+    <link rel="stylesheet" href="css/painel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ===================================================================
+         HUD DE TELEMETRIA (Canto Superior Direito)
+         =================================================================== -->
+    <div id="hud-telemetry" style="
+        position: fixed; 
+        top: 20px; 
+        right: 20px; 
+        background: rgba(0, 0, 0, 0.85);
+        border: 3px solid #00ff00;
+        padding: 15px;
+        color: #00ff00; 
+        font-family: 'VT323', monospace; 
+        font-size: 1.3rem; 
+        text-shadow: 1px 1px 2px #000; 
+        pointer-events: none;
+        min-width: 250px;
+        z-index: 500;
+    ">
+        <div style="border-bottom: 2px solid #00ff00; padding-bottom: 5px; margin-bottom: 10px; color: #ffff00; text-align: center; font-size: 1.5rem;">
+            🌍 TELEMETRIA
+        </div>
+        <div style="margin: 8px 0;">ALTITUDE: <span id="hud-altitude">0.0m</span></div>
+        <div style="margin: 8px 0;">TERRENO: <span id="hud-terrain">0.0m</span></div>
+        <div style="margin: 8px 0;">PROFUNDIDADE: <span id="hud-depth">0m</span></div>
+        
+        <div id="bedrock-warning" style="color: #ff4444; display: none; margin-top: 10px; animation: blink 1s infinite;">
+            ⚠️ PROXIMIDADE DO BEDROCK
+        </div>
+        <div id="space-warning" style="color: #4444ff; display: none; margin-top: 10px; animation: blink 1s infinite;">
+            ⚠️ LIMITE ATMOSFÉRICO
+        </div>
+        
+        <div style="font-size: 0.9em; opacity: 0.7; margin-top: 12px; border-top: 1px solid #00ff00; padding-top: 8px;">
+            <div>DIST. ESPAÇO: <span id="hud-space">0m</span></div>
+            <div>DIST. BEDROCK: <span id="hud-bedrock">0m</span></div>
+        </div>
+    </div>
+
+    <!-- ===================================================================
+         PAINEL RPG PRINCIPAL (Esquerda)
+         =================================================================== -->
+    <div class="rpg-panel">
+        <header>
+            <h1>Mundo Procedural 3D</h1>
+            <div class="stats">
+                <div class="stat-box seed-box">
+                    <label for="seed-input">SEED:</label>
+                    <input 
+                        type="number" 
+                        id="seed-input" 
+                        value="12345" 
+                        min="1" 
+                        max="9999999"
+                        style="
+                            width: 90px;
+                            background: rgba(0, 0, 0, 0.6);
+                            border: 2px solid #4169e1;
+                            color: #ffff00;
+                            font-family: 'VT323', monospace;
+                            font-size: 1.2rem;
+                            padding: 3px 8px;
+                            text-align: center;
+                            margin: 0 5px;
+                        "
+                    />
+                    <button 
+                        id="btn-random-seed" 
+                        style="
+                            background: #2e7d32;
+                            border: 2px solid #4caf50;
+                            color: white;
+                            font-family: 'VT323', monospace;
+                            font-size: 1rem;
+                            padding: 4px 10px;
+                            cursor: pointer;
+                            transition: all 0.2s;
+                        "
+                        title="Gerar SEED Aleatória"
+                    >
+                        🎲
+                    </button>
+                </div>
+                <div class="stat-box">FPS: <b id="fps">60</b></div>
+            </div>
+            
+            <!-- Estatísticas do Planeta -->
+            <div class="planet-stats">
+                <div>
+                    <span class="label">Chunks Gerados:</span>
+                    <span class="value" id="planet-chunks">0</span>
+                </div>
+                <div>
+                    <span class="label">Altura Máx:</span>
+                    <span class="value" id="planet-max-height">0m</span>
+                </div>
+                <div>
+                    <span class="label">Profundidade:</span>
+                    <span class="value" id="planet-min-height">0m</span>
+                </div>
+                <div>
+                    <span class="label">Área Coberta:</span>
+                    <span class="value" id="planet-coverage">0 km²</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            
+            <div class="section">
+                <h3>🎮 MODO</h3>
+                <div class="mode-selector">
+                    <button class="mode-btn" data-mode="manual" aria-pressed="true">MANUAL</button>
+                    <button class="mode-btn" data-mode="assistida" aria-pressed="false">ASSIST</button>
+                    <button class="mode-btn" data-mode="aleatoria" aria-pressed="false">CAOS</button>
+                </div>
+
+                <div class="slider-box">
+                    <label>MISTURA</label>
+                    <input id="blend" type="range" min="0" max="100" value="65" />
+                    <div class="val-display"><span id="blendVal">65</span>%</div>
+                </div>
+                <div class="slider-box">
+                    <label>ESCALA</label>
+                    <input id="scale" type="range" min="20" max="150" value="60" />
+                    <div class="val-display"><span id="scaleVal">60</span></div>
+                </div>
+                <div class="slider-box">
+                    <label>INTENSIDADE</label>
+                    <input id="intensity" type="range" min="0" max="100" value="70" />
+                    <div class="val-display"><span id="intensityVal">70</span>%</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⛰️ RELEVO</h3>
+                <div class="icon-grid">
+                    <button class="icon-btn" data-layer="relevo" data-item="Elevar" aria-pressed="false">
+                        <div class="icon icon-elevar"></div>
+                        <span>Elevar</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Rebaixar" aria-pressed="false">
+                        <div class="icon icon-rebaixar"></div>
+                        <span>Rebaixar</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Planícies" aria-pressed="false">
+                        <div class="icon icon-planicie"></div>
+                        <span>Planícies</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Colinas" aria-pressed="false">
+                        <div class="icon icon-colinas"></div>
+                        <span>Colinas</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Montanhas" aria-pressed="false">
+                        <div class="icon icon-montanhas"></div>
+                        <span>Montanhas</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Cânions" aria-pressed="false">
+                        <div class="icon icon-canions"></div>
+                        <span>Cânions</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Vales" aria-pressed="false">
+                        <div class="icon icon-vales"></div>
+                        <span>Vales</span>
+                    </button>
+                    <button class="icon-btn" data-layer="relevo" data-item="Abismo" aria-pressed="false">
+                        <div class="icon icon-abismo"></div>
+                        <span>Abismo</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>💧 FLUIDOS</h3>
+                <div class="icon-grid">
+                    <button class="icon-btn" data-layer="agua" data-item="Lagos" aria-pressed="false">
+                        <div class="icon icon-lagos"></div>
+                        <span>Lagos</span>
+                    </button>
+                    <button class="icon-btn" data-layer="agua" data-item="Rios" aria-pressed="false">
+                        <div class="icon icon-rios"></div>
+                        <span>Rios</span>
+                    </button>
+                    <button class="icon-btn" data-layer="agua" data-item="Oceano" aria-pressed="false">
+                        <div class="icon icon-oceano"></div>
+                        <span>Oceano</span>
+                    </button>
+                    <button class="icon-btn" data-layer="agua" data-item="Pântanos" aria-pressed="false">
+                        <div class="icon icon-pantanoso"></div>
+                        <span>Pântanos</span>
+                    </button>
+                    <button class="icon-btn" data-layer="agua" data-item="Lava" aria-pressed="false">
+                        <div class="icon icon-lava"></div>
+                        <span>Lava</span>
+                    </button>
+                    <button class="icon-btn" data-layer="agua" data-item="Mel" aria-pressed="false">
+                        <div class="icon icon-mel"></div>
+                        <span>Mel</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🌿 BIOMAS</h3>
+                <div class="icon-grid">
+                    <button class="icon-btn" data-layer="veg" data-item="Floresta" aria-pressed="false">
+                        <div class="icon icon-floresta"></div>
+                        <span>Floresta</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Selva" aria-pressed="false">
+                        <div class="icon icon-selva"></div>
+                        <span>Selva</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Deserto" aria-pressed="false">
+                        <div class="icon icon-deserto"></div>
+                        <span>Deserto</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Tundra" aria-pressed="false">
+                        <div class="icon icon-tundra"></div>
+                        <span>Tundra</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Corrupção" aria-pressed="false">
+                        <div class="icon icon-corrupcao"></div>
+                        <span>Corrupção</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Carmesim" aria-pressed="false">
+                        <div class="icon icon-carmesim"></div>
+                        <span>Carmesim</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Hallow" aria-pressed="false">
+                        <div class="icon icon-hallow"></div>
+                        <span>Hallow</span>
+                    </button>
+                    <button class="icon-btn" data-layer="veg" data-item="Cogumelos" aria-pressed="false">
+                        <div class="icon icon-cogumelos"></div>
+                        <span>Cogumelos</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>🌅 Ciclo do Dia</h3>
+                <div class="mode-selector mode-selector-4col">
+                    <button class="mode-btn icon-btn" aria-pressed="true" data-cycle="dia">
+                        <div class="icon icon-dia"></div>
+                        <span>Dia</span>
+                    </button>
+                    <button class="mode-btn icon-btn" aria-pressed="false" data-cycle="noite">
+                        <div class="icon icon-noite"></div>
+                        <span>Noite</span>
+                    </button>
+                    <button class="mode-btn icon-btn" aria-pressed="false" data-cycle="aurora">
+                        <div class="icon icon-aurora"></div>
+                        <span>Aurora</span>
+                    </button>
+                    <button class="mode-btn icon-btn" aria-pressed="false" data-cycle="crepusculo">
+                        <div class="icon icon-crepusculo"></div>
+                        <span>Crepúsculo</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <button id="newSeed" class="action-btn btn-secondary">
+                    <span class="action-icon icon-reroll"></span>
+                    REROLL
+                </button>
+                <button id="randomCombo" class="action-btn btn-secondary">
+                    <span class="action-icon icon-random"></span>
+                    RANDOM
+                </button>
+                <button id="clear" class="action-btn btn-danger">
+                    <span class="action-icon icon-clear"></span>
+                    LIMPAR
+                </button>
+                <button id="combine" class="action-btn btn-primary">
+                    <span class="action-icon icon-generate"></span>
+                    GERAR
+                </button>
+            </div>
+            
+            <!-- ===================================================================
+                 BOTÕES DO SISTEMA DE PLANETA
+                 =================================================================== -->
+            <div class="planet-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                <button class="planet-btn btn-save" id="btn-save-planet">
+                    💾 Salvar
+                </button>
+                <button class="planet-btn btn-load" id="btn-load-planet">
+                    📂 Carregar
+                </button>
+                <button class="planet-btn btn-export" id="btn-export-planet">
+                    📦 Exportar
+                </button>
+                <button class="planet-btn btn-stats" id="btn-show-stats">
+                    📊 Estatísticas
+                </button>
+            </div>
+
+            <!-- Integração com Builder -->
+            <div style="margin-top: 12px;">
+                <button class="planet-btn btn-save" id="btn-open-builder" style="width: 100%; background: linear-gradient(135deg, #1a3a1a, #2d5a2d); border-color: #4CAF50; color: #90EE90; font-size: 1.1rem;">
+                    🏗️ Abrir no Builder
+                </button>
+                <div id="builder-status" style="font-size: 12px; color: #666; text-align: center; margin-top: 4px;"></div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-label">COMBINAÇÃO:</div>
+                <div id="comboText" class="status-value">Aguardando...</div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- ===================================================================
+         INPUT DE ARQUIVO (ESCONDIDO)
+         =================================================================== -->
+    <input type="file" id="planetFileInput" style="display: none;" accept=".json,.planet">
+    
+    <!-- ===================================================================
+         MODAL DE ESTATÍSTICAS
+         =================================================================== -->
+    <div id="stats-modal" style="
+        display: none; 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        background: rgba(0, 0, 0, 0.95); 
+        border: 4px solid #00ff00; 
+        padding: 30px; 
+        color: #ffffff; 
+        z-index: 1000; 
+        font-family: 'VT323', monospace; 
+        min-width: 500px;
+        max-width: 80%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 0 50px rgba(0, 255, 0, 0.5);
+    ">
+        <h2 style="
+            border-bottom: 2px solid #00ff00; 
+            padding-bottom: 10px; 
+            margin-top: 0;
+            color: #00ff00;
+            text-align: center;
+            font-size: 2rem;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        ">
+            📊 ESTATÍSTICAS DO PLANETA
+        </h2>
+        <div id="stats-content" style="
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            margin: 20px 0;
+        ">
+            <!-- Preenchido dinamicamente via JavaScript -->
+        </div>
+        <button id="close-stats" style="
+            margin-top: 15px; 
+            width: 100%; 
+            background: #cc0000; 
+            color: white; 
+            border: 2px solid #ff0000; 
+            padding: 12px; 
+            cursor: pointer; 
+            font-family: inherit; 
+            font-size: 1.3rem;
+            transition: all 0.2s;
+        ">
+            FECHAR
+        </button>
+    </div>
+    
+    <canvas id="minimap"></canvas>
+    
+	<script src="system/three.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+    
+    <style>
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        #close-stats:hover {
+            background: #ff0000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+    </style>
+
+    <script type="module">
+        // ================================================================
+        // INTEGRAÇÃO: Exportar para Builder via BroadcastChannel
+        // Motivo: localStorage tem limite ~5MB; planetas grandes excedem.
+        // BroadcastChannel passa o objeto pela memória, sem limite.
+        // ================================================================
+        const btnOpenBuilder = document.getElementById('btn-open-builder');
+        const builderStatus  = document.getElementById('builder-status');
+
+        // Canal compartilhado — mesmo nome usado no Builder
+        const channel = new BroadcastChannel('planet_transfer');
+
+        if (btnOpenBuilder) {
+            btnOpenBuilder.addEventListener('click', () => {
+                const ps = window.planetSystem;
+                if (!ps) {
+                    builderStatus.textContent = '⚠️ Gere um mundo primeiro!';
+                    builderStatus.style.color = '#ff9900';
+                    return;
+                }
+
+                try {
+                    const data = ps.exportPlanetData ? ps.exportPlanetData() : null;
+
+                    if (!data) {
+                        builderStatus.textContent = '⚠️ Nenhum dado de planeta disponível.';
+                        builderStatus.style.color = '#ff9900';
+                        return;
+                    }
+
+                    // Abre o Builder primeiro, depois aguarda ele sinalizar que está pronto
+                    builderStatus.textContent = '⏳ Abrindo Builder...';
+                    builderStatus.style.color = '#aaaaff';
+                    const builderWin = window.open('builder_2.html', '_blank');
+
+                    // Aguarda o Builder enviar 'ready' pelo canal (até 10s)
+                    let sent = false;
+                    const timeout = setTimeout(() => {
+                        if (!sent) {
+                            // Fallback: envia mesmo assim após 3s
+                            channel.postMessage({ type: 'planet_data', payload: data });
+                            builderStatus.textContent = '✅ Dados enviados (timeout fallback).';
+                            builderStatus.style.color = '#90EE90';
+                        }
+                    }, 3000);
+
+                    channel.onmessage = (e) => {
+                        if (e.data && e.data.type === 'builder_ready' && !sent) {
+                            sent = true;
+                            clearTimeout(timeout);
+                            channel.postMessage({ type: 'planet_data', payload: data });
+                            builderStatus.textContent = '✅ Mapa enviado para o Builder!';
+                            builderStatus.style.color = '#90EE90';
+                            channel.onmessage = null;
+                        }
+                    };
+
+                } catch (e) {
+                    builderStatus.textContent = '❌ Erro: ' + e.message;
+                    builderStatus.style.color = '#ff4444';
+                    console.error(e);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>Editor de Mundo Completo - Ferramentas de Construção</title>
+    <link rel="stylesheet" href="css/painel_builder.css">
+	<link rel="stylesheet" href="css/painel.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+	<style>
+	.shortcut-key {
+		display: inline-block;
+		padding: 2px 6px;
+		background: rgba(255, 255, 255, 0.1);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		border-radius: 3px;
+		font-family: 'VT323', monospace;
+		font-size: 12px;
+		text-align: center;
+		min-width: 30px;
+	}
+
+	/* Efeito hover nos botões de ferramenta quando ativos */
+	.tool-btn.active {
+		background: var(--accent);
+		border-color: var(--text-gold);
+		box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+	}
+
+	.tool-btn.active .icon {
+		filter: brightness(1.5);
+	}
+</style>
+</head>
+<body>
+    <div class="panel-container">
+        <!-- Visualização do mundo (parcial placeholder) -->
+        <div class="main-canvas">
+            <div class="world-view">
+                <div class="terrain-sample"></div>
+                <div class="floating-object object-1"></div>
+                <div class="floating-object object-2"></div>
+                <div class="floating-object object-3"></div>
+            </div>
+            
+            <div class="world-controls">
+                <button class="world-btn" id="btn-rotate">↻ Rotacionar Vista</button>
+                <button class="world-btn" id="btn-reset">↺ Resetar Vista</button>
+                <button class="world-btn" id="btn-toggle-grid"># Alternar Grade</button>
+            </div>
+            
+            <div class="notification" id="notification">Ferramenta selecionada: Elevar</div>
+        </div>
+        
+        <!-- Painel de ferramentas -->
+        <div class="rpg-panel" style="width: 380px; overflow-y: auto;">
+            <header>
+                <h1>🌍 EDITOR DE MUNDO</h1>
+                <div class="stats">
+                    <div class="stat-box">Vértices: <b id="vertex-count">12.5k</b></div>
+                    <div class="stat-box">FPS: <b id="fps-count">60</b></div>
+                </div>
+            </header>
+            
+            <div class="tab-container">
+                <button class="tab active" data-tab="terrain">⛰️ Terreno</button>
+                <button class="tab" data-tab="objects">🌲 Objetos</button>
+                <button class="tab" data-tab="construction">🏗️ Construção</button>
+                <button class="tab" data-tab="tools">🔧 Ferramentas</button>
+                <button class="tab" data-tab="world">🌎 Mundo</button>
+            </div>
+			
+			<div class="content">
+				<div class="section">
+					<h3>📂 ARQUIVO</h3>
+						<div class="action-row">
+							<button id="btn-load-file" class="action-btn btn-primary">
+								📂 Carregar .planet
+							</button>
+							<input type="file" id="file-input" accept=".json,.planet" style="display: none;">
+						   </div>
+						<!-- Integração com Mundo Procedural -->
+						<div class="action-row" style="margin-top: 8px;">
+							<button id="btn-load-from-world" class="action-btn btn-primary" style="background: linear-gradient(135deg, #1a2a3a, #2d4a6a); border-color: #4a90d9; color: #90ccff; width: 100%;">
+								🌍 Carregar Mundo Atual
+							</button>
+						</div>
+						<div class="action-row" style="margin-top: 4px;">
+							<button id="btn-back-to-world" class="action-btn" style="background: linear-gradient(135deg, #2a1a3a, #4a2d6a); border-color: #9a4ad9; color: #cc90ff; width: 100%;">
+								🔭 Voltar ao Mundo Procedural
+							</button>
+						</div>
+						<div id="file-status" style="font-size: 14px; color: #aaa; margin-top: 5px;">Nenhum mapa carregado</div>
+					</div>
+            
+            <div class="content">
+                <!-- Aba de Terreno -->
+                <div class="tab-content active" id="tab-terrain">
+                    <div class="section">
+                        <h3>⛰️ ESCULTURA DE TERRA</h3>
+                        <div class="tool-grid">
+                            <button class="icon-btn tool-btn" data-tool="raise">
+                                <div class="icon icon-elevar"></div>
+                                <span>Elevar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="lower">
+                                <div class="icon icon-rebaixar"></div>
+                                <span>Rebaixar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="flatten">
+                                <div class="icon icon-planicie"></div>
+                                <span>Aplainar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="smooth">
+                                <div class="icon icon-colinas"></div>
+                                <span>Suavizar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="terraform">
+                                <div class="icon icon-terraform"></div>
+                                <span>Terraformar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="dig">
+                                <div class="icon icon-escavar"></div>
+                                <span>Escavar</span>
+                            </button>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>RAIO</label>
+                            <input id="brush-radius" type="range" min="1" max="50" value="15">
+                            <div class="val-display" id="disp-radius">15</div>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>FORÇA</label>
+                            <input id="brush-strength" type="range" min="1" max="100" value="25">
+                            <div class="val-display" id="disp-strength">25</div>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>SUAVIDADE</label>
+                            <input id="brush-smoothness" type="range" min="1" max="100" value="50">
+                            <div class="val-display" id="disp-smoothness">50</div>
+                        </div>
+                    </div>
+					
+				<div style="margin-top: 10px;">
+                    <button class="action-btn btn-secondary tool-btn" data-tool="place" style="width: 100%;">
+                        📍 MODO POSICIONAR
+                    </button>
+                </div>
+                    
+                    <div class="section">
+                        <h3>🎨 PINTURA DE TEXTURA</h3>
+                        <div class="tool-grid">
+                            <button class="icon-btn tool-btn" data-tool="paint">
+                                <div class="icon icon-pintar"></div>
+                                <span>Pintar</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="texture">
+                                <div class="icon icon-textura"></div>
+                                <span>Textura</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="biome">
+                                <div class="icon icon-floresta"></div>
+                                <span>Bioma</span>
+                            </button>
+                            <button class="icon-btn tool-btn" data-tool="erase-paint">
+                                <div class="icon icon-clear"></div>
+                                <span>Apagar</span>
+                            </button>
+                        </div>
+                        
+                        <div class="color-palette">
+                            <div class="color-box" style="background: #228B22;" title="Grama"></div>
+                            <div class="color-box" style="background: #8B4513;" title="Terra"></div>
+                            <div class="color-box" style="background: #808080;" title="Pedra"></div>
+                            <div class="color-box" style="background: #F4A460;" title="Areia"></div>
+                            <div class="color-box" style="background: #FFFFFF;" title="Neve"></div>
+                            <div class="color-box" style="background: #2E8B57;" title="Floresta"></div>
+                            <div class="color-box" style="background: #D2691E;" title="Deserto"></div>
+                            <div class="color-box" style="background: #1E90FF;" title="Água"></div>
+                            <div class="color-box" style="background: #FF4500;" title="Lava"></div>
+                            <div class="color-box" style="background: #9B30FF;" title="Corrupção"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>📐 FERRAMENTAS DE PRECISÃO</h3>
+                        <div class="action-row">
+                            <button class="action-btn btn-secondary" id="btn-measure">
+                                <div class="icon icon-medir"></div>
+                                Medir
+                            </button>
+                            <button class="action-btn btn-secondary" id="btn-alignment">
+                                <div class="icon icon-planicie"></div>
+                                Alinhar
+                            </button>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>PRECISÃO</label>
+                            <input id="precision-level" type="range" min="1" max="10" value="5">
+                            <div class="val-display" id="disp-precision">5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aba de Objetos -->
+                <div class="tab-content" id="tab-objects">
+                    <div class="section">
+                        <h3>🌳 VEGETAÇÃO</h3>
+                        <div class="construction-grid">
+                            <button class="construction-btn obj-btn" data-obj="pinheiro">
+                                <div class="icon icon-floresta"></div>
+                                <span>Pinheiro</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="carvalho">
+                                <div class="icon icon-selva"></div>
+                                <span>Carvalho</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="macieira">
+                                <div class="icon icon-floresta"></div>
+                                <span>Macieira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="palmeira">
+                                <div class="icon icon-deserto"></div>
+                                <span>Palmeira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="arbusto">
+                                <div class="icon icon-floresta"></div>
+                                <span>Arbusto</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="flores">
+                                <div class="icon icon-floresta"></div>
+                                <span>Flores</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="cogumelo">
+                                <div class="icon icon-cogumelos"></div>
+                                <span>Cogumelo</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="samambaia">
+                                <div class="icon icon-selva"></div>
+                                <span>Samambaia</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>🪨 ROCHAS & RECURSOS</h3>
+                        <div class="construction-grid">
+                            <button class="construction-btn obj-btn" data-obj="pedra-grande">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Rocha Grande</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="pedra-media">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Rocha Média</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="pedra-pequena">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Rocha Pequena</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="minerio-ferro">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Minério Ferro</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="minerio-ouro">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Minério Ouro</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="cristal">
+                                <div class="icon icon-hallow"></div>
+                                <span>Cristal</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="arvore-petrificada">
+                                <div class="icon icon-floresta"></div>
+                                <span>Árvore Petrificada</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="fossil">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Fóssil</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+					<div class="section">
+					<h3>🎯 FERRAMENTAS DE OBJETO</h3>
+
+					<div class="tool-grid">
+						<button class="icon-btn tool-btn" data-tool="select-object">
+							<div class="icon icon-selecao"></div>
+							<span>Selecionar</span>
+						</button>
+						<button class="icon-btn tool-btn" data-tool="move-object">
+							<div class="icon icon-mover"></div>
+							<span>Mover</span>
+						</button>
+						<button class="icon-btn tool-btn" data-tool="rotate-object">
+							<div class="icon icon-rotacionar"></div>
+							<span>Rotacionar</span>
+						</button>
+						<button class="icon-btn tool-btn" data-tool="scale-object">
+							<div class="icon icon-escalar"></div>
+							<span>Escalar</span>
+						</button>
+						<button class="icon-btn tool-btn" data-tool="duplicate-object">
+							<div class="icon icon-random"></div>
+							<span>Duplicar</span>
+						</button>
+						<button class="icon-btn tool-btn" data-tool="delete-object">
+							<div class="icon icon-clear"></div>
+							<span>Remover</span>
+						</button>
+					</div>
+
+					<div class="action-row" style="margin-top: 10px;">
+						<button class="action-btn btn-secondary" id="btn-select-all">
+							Selecionar Todos
+						</button>
+						<button class="action-btn btn-danger" id="btn-clear-all">
+							Remover Todos
+						</button>
+					</div>
+
+					<!-- INFO DO OBJETO (APENAS 1 VEZ!) -->
+					<div id="object-info-panel" style="
+						margin-top: 15px;
+						padding: 10px;
+						background: rgba(0, 0, 0, 0.3);
+						border: 2px solid var(--ui-border-dark);
+						border-radius: 4px;
+						font-family: 'VT323', monospace;
+						font-size: 14px;
+					">
+						<div style="margin-bottom: 5px; color: var(--text-gold);">
+							📦 OBJETO SELECIONADO
+						</div>
+						<div id="selected-object-name" style="
+							color: var(--text-main);
+							padding: 5px;
+							background: rgba(0, 0, 0, 0.2);
+							border-left: 3px solid var(--accent);
+						">
+							Nenhum objeto selecionado
+						</div>
+						<div id="selected-object-position" style="
+							margin-top: 5px;
+							font-size: 12px;
+							color: var(--text-dim);
+						">
+							Clique em um objeto na cena
+						</div>
+					</div>
+
+					<!-- ATALHOS DE TECLADO (APENAS 1 VEZ!) -->
+					<div id="keyboard-shortcuts-panel" style="
+						margin-top: 15px;
+						padding: 10px;
+						background: rgba(0, 0, 0, 0.2);
+						border: 2px solid var(--ui-border-dark);
+						border-radius: 4px;
+						font-family: 'VT323', monospace;
+						font-size: 12px;
+					">
+						<div style="margin-bottom: 8px; color: var(--text-gold); font-size: 14px;">
+							⌨️ ATALHOS DE TECLADO
+						</div>
+						<div style="display: grid; grid-template-columns: auto 1fr; gap: 5px; color: var(--text-main);">
+							<kbd class="shortcut-key">T</kbd>
+							<span>Mover objeto</span>
+							
+							<kbd class="shortcut-key">R</kbd>
+							<span>Rotacionar objeto</span>
+							
+							<kbd class="shortcut-key">S</kbd>
+							<span>Escalar objeto</span>
+							
+							<kbd class="shortcut-key">Ctrl+D</kbd>
+							<span>Duplicar selecionado</span>
+							
+							<kbd class="shortcut-key">Del</kbd>
+							<span>Remover selecionado</span>
+						</div>
+					</div>
+                </div>
+           </div>    <!-- Aba de Construção -->
+                <div class="tab-content" id="tab-construction">
+                    <div class="section">
+                        <h3>🏠 ESTRUTURAS</h3>
+                        <div class="construction-grid">
+                            <button class="construction-btn obj-btn" data-obj="casa-madeira">
+                                <div class="icon icon-casa"></div>
+                                <span>Casa Madeira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="casa-pedra">
+                                <div class="icon icon-casa"></div>
+                                <span>Casa Pedra</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="castelo">
+                                <div class="icon icon-castelo"></div>
+                                <span>Castelo</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="torre">
+                                <div class="icon icon-predio"></div>
+                                <span>Torre</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="ponte">
+                                <div class="icon icon-ponte"></div>
+                                <span>Ponte</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="muro">
+                                <div class="icon icon-muro"></div>
+                                <span>Muro</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="portao">
+                                <div class="icon icon-muro"></div>
+                                <span>Portão</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="escada">
+                                <div class="icon icon-escada"></div>
+                                <span>Escada</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>🛤️ INFRAESTRUTURA</h3>
+                        <div class="construction-grid">
+                            <button class="construction-btn obj-btn" data-obj="estrada">
+                                <div class="icon icon-estrada"></div>
+                                <span>Estrada</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="ponte-madeira">
+                                <div class="icon icon-ponte"></div>
+                                <span>Ponte Madeira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="farol">
+                                <div class="icon icon-iluminacao"></div>
+                                <span>Farol</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="bandeira">
+                                <div class="icon icon-banderia"></div>
+                                <span>Bandeira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="fogueira">
+                                <div class="icon icon-fogo"></div>
+                                <span>Fogueira</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="poco">
+                                <div class="icon icon-agua"></div>
+                                <span>Poço</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="estatua">
+                                <div class="icon icon-montanhas"></div>
+                                <span>Estátua</span>
+                            </button>
+                            <button class="construction-btn obj-btn" data-obj="monumento">
+                                <div class="icon icon-castelo"></div>
+                                <span>Monumento</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>🧱 MODOS DE CONSTRUÇÃO</h3>
+                        <div class="category-grid">
+                            <button class="category-btn" data-mode="free">🆓 Livre</button>
+                            <button class="category-btn" data-mode="grid">📊 Grade</button>
+                            <button class="category-btn" data-mode="snap">🧲 Snapping</button>
+                            <button class="category-btn" data-mode="align">📐 Alinhamento</button>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>TAMANHO GRADE</label>
+                            <input id="grid-size" type="range" min="1" max="20" value="5">
+                            <div class="val-display" id="disp-grid">5</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aba de Ferramentas -->
+                <div class="tab-content" id="tab-tools">
+                    <div class="section">
+                        <h3>🔄 AÇÕES</h3>
+                        <div class="action-panel">
+                            <button class="quick-action" id="btn-undo">
+                                <div class="icon icon-undos" style="display: inline-block; vertical-align: middle; margin-right: 5px;"></div>
+                                Desfazer
+                            </button>
+                            <button class="quick-action" id="btn-redo">
+                                <div class="icon icon-redos" style="display: inline-block; vertical-align: middle; margin-right: 5px;"></div>
+                                Refazer
+                            </button>
+                            <button class="quick-action" id="btn-copy">
+                                📋 Copiar
+                            </button>
+                            <button class="quick-action" id="btn-paste">
+                                📄 Colar
+                            </button>
+                            <button class="quick-action" id="btn-mirror-x">
+                                ⇄ Espelhar X
+                            </button>
+                            <button class="quick-action" id="btn-mirror-y">
+                                ⇅ Espelhar Y
+                            </button>
+                            <button class="quick-action" id="btn-rotate-90">
+                                ↻ 90°
+                            </button>
+                            <button class="quick-action" id="btn-reset-rotation">
+                                ↺ Reset Rot.
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>📁 ARQUIVO</h3>
+                        <div class="action-row">
+                            <button class="action-btn btn-primary" id="btn-load-world">
+                                <div class="icon icon-carregar"></div>
+                                Carregar Mundo
+                            </button>
+                            <button class="action-btn btn-save" id="btn-save-world">
+                                <div class="icon icon-salvar"></div>
+                                Salvar Mundo
+                            </button>
+                        </div>
+                        
+                        <div class="action-row">
+                            <button class="action-btn btn-secondary" id="btn-export-world">
+                                <div class="icon icon-exportar"></div>
+                                Exportar
+                            </button>
+                            <button class="action-btn btn-secondary" id="btn-import">
+                                <div class="icon icon-carregar"></div>
+                                Importar
+                            </button>
+                        </div>
+                        
+                        <div id="file-status" style="font-size: 14px; color: #aaa; margin-top: 10px; text-align: center;">
+                            Nenhum arquivo carregado
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>⚙️ CONFIGURAÇÕES</h3>
+                        <div class="slider-box">
+                            <label>QUALIDADE</label>
+                            <input id="quality-level" type="range" min="1" max="5" value="3">
+                            <div class="val-display" id="disp-quality">3</div>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>DISTÂNCIA VISÃO</label>
+                            <input id="view-distance" type="range" min="1" max="10" value="7">
+                            <div class="val-display" id="disp-view">7</div>
+                        </div>
+                        
+                        <div class="slider-box" style="margin-top: 10px;">
+                            <label>RESOLUÇÃO DO TERRENO</label>
+                            <select id="terrain-resolution" style="width: 100%; background: var(--bg-secondary, #1a1a2e); color: var(--text-primary, #e0e0e0); border: 1px solid var(--border, #333); padding: 4px 8px; font-family: inherit; font-size: 0.9rem; cursor: pointer;">
+                                <option value="64">64×64 — Rápido</option>
+                                <option value="128" selected>128×128 — Padrão</option>
+                                <option value="256">256×256 — Alta Qualidade</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <button class="action-btn btn-secondary" id="btn-settings" style="width: 100%;">
+                                <div class="icon icon-config"></div>
+                                Configurações Avançadas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aba de Mundo -->
+                <div class="tab-content" id="tab-world">
+                    <div class="section">
+                        <h3>🌍 CONFIGURAÇÕES DE MUNDO</h3>
+                        <div class="preset-grid">
+                            <button class="preset-btn" data-preset="earth">Terra</button>
+                            <button class="preset-btn" data-preset="mars">Marte</button>
+                            <button class="preset-btn" data-preset="fantasy">Fantasia</button>
+                            <button class="preset-btn" data-preset="alien">Alienígena</button>
+                            <button class="preset-btn" data-preset="moon">Lua</button>
+                            <button class="preset-btn" data-preset="ocean">Oceano</button>
+                            <button class="preset-btn" data-preset="desert">Deserto</button>
+                            <button class="preset-btn" data-preset="arctic">Ártico</button>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>⏰ CICLO DO DIA</h3>
+                        <div class="mode-selector mode-selector-4col">
+                            <button class="icon-btn" data-time="dawn">
+                                <div class="icon icon-crepusculo"></div>
+                                <span>Amanhecer</span>
+                            </button>
+                            <button class="icon-btn" data-time="day">
+                                <div class="icon icon-dia"></div>
+                                <span>Dia</span>
+                            </button>
+                            <button class="icon-btn" data-time="dusk">
+                                <div class="icon icon-crepusculo"></div>
+                                <span>Entardecer</span>
+                            </button>
+                            <button class="icon-btn" data-time="night">
+                                <div class="icon icon-noite"></div>
+                                <span>Noite</span>
+                            </button>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>HORA DO DIA</label>
+                            <input id="time-of-day" type="range" min="0" max="24" value="12">
+                            <div class="val-display" id="disp-time">12:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>☁️ CLIMA & EFEITOS</h3>
+                        <div class="tool-grid">
+                            <button class="icon-btn" data-weather="clear">
+                                <div class="icon icon-dia"></div>
+                                <span>Limpo</span>
+                            </button>
+                            <button class="icon-btn" data-weather="rain">
+                                <div class="icon icon-clima"></div>
+                                <span>Chuva</span>
+                            </button>
+                            <button class="icon-btn" data-weather="snow">
+                                <div class="icon icon-tundra"></div>
+                                <span>Neve</span>
+                            </button>
+                            <button class="icon-btn" data-weather="fog">
+                                <div class="icon icon-clima"></div>
+                                <span>Névoa</span>
+                            </button>
+                            <button class="icon-btn" data-weather="storm">
+                                <div class="icon icon-clima"></div>
+                                <span>Tempestade</span>
+                            </button>
+                            <button class="icon-btn" data-weather="aurora">
+                                <div class="icon icon-aurora"></div>
+                                <span>Aurora</span>
+                            </button>
+                        </div>
+                        
+                        <div class="slider-box">
+                            <label>INTENSIDADE</label>
+                            <input id="weather-intensity" type="range" min="1" max="10" value="5">
+                            <div class="val-display" id="disp-intensity">5</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3>🧪 ELEMENTOS ESPECIAIS</h3>
+                        <div class="action-row">
+                            <button class="action-btn btn-secondary" data-element="water">
+                                <div class="icon icon-agua"></div>
+                                Água
+                            </button>
+                            <button class="action-btn btn-secondary" data-element="lava">
+                                <div class="icon icon-lava"></div>
+                                Lava
+                            </button>
+                            <button class="action-btn btn-secondary" data-element="magic">
+                                <div class="icon icon-magia"></div>
+                                Magia
+                            </button>
+                            <button class="action-btn btn-secondary" data-element="poison">
+                                <div class="icon icon-corrupcao"></div>
+                                Veneno
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-row" style="margin-top: 20px; border-top: 2px solid #ccc; padding-top: 10px;">
+                    <button id="btn-quick-save" class="action-btn btn-save" style="width: 48%;">
+                        💾 SALVAR
+                    </button>
+                    <button id="btn-reset-world" class="action-btn btn-danger" style="width: 48%;">
+                        🗑️ RESETAR
+                    </button>
+                </div>
+                
+                <div class="status-bar" style="margin-top: 15px;">
+                    <div class="status-label">FERRAMENTA:</div>
+                    <div class="status-value" id="current-tool-display">Elevar Terreno</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+	<script src="https://unpkg.com/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+	
+	
+	<script type="module" src="js/builder.js"></script>
+	<script type="module" src="js/gizmo_controller.js"></script>
+	<script src="js/frontend.js"></script>
+
+	<script>
+	// ================================================================
+	// INTEGRAÇÃO: Receber mapa do Mundo Procedural via BroadcastChannel
+	// Motivo: localStorage tem limite ~5MB; planetas grandes excedem.
+	// ================================================================
+	(function() {
+		const channel = new BroadcastChannel('planet_transfer');
+		const fileStatus = document.getElementById('file-status');
+		let pendingData = null; // Dados recebidos antes do builder estar pronto
+
+		// Sinaliza para o Index que esta aba está pronta para receber
+		channel.postMessage({ type: 'builder_ready' });
+
+		// Escuta dados do mundo procedural
+		channel.onmessage = (e) => {
+			if (!e.data || e.data.type !== 'planet_data') return;
+			pendingData = e.data.payload;
+			if (fileStatus) {
+				const name = pendingData.metadata && pendingData.metadata.name ? pendingData.metadata.name : 'Planeta';
+				fileStatus.textContent = `🌍 "${name}" recebido — clique em "Carregar Mundo Atual".`;
+				fileStatus.style.color = '#90ccff';
+			}
+		};
+
+		window.addEventListener('load', () => {
+			// Botão: aplicar os dados recebidos pelo canal
+			const btnLoadFromWorld = document.getElementById('btn-load-from-world');
+			if (btnLoadFromWorld) {
+				btnLoadFromWorld.addEventListener('click', () => {
+					if (!pendingData) {
+						if (fileStatus) { fileStatus.textContent = '⚠️ Nenhum mapa recebido do Mundo Procedural ainda.'; fileStatus.style.color = '#ff9900'; }
+						return;
+					}
+					// Aguarda o builder (módulo async) estar pronto
+					const tryLoad = setInterval(() => {
+						if (window.builder && window.builder.io) {
+							clearInterval(tryLoad);
+							window.builder.io.loadMap(pendingData);
+							const name = pendingData.metadata && pendingData.metadata.name ? pendingData.metadata.name : 'Planeta';
+							if (fileStatus) { fileStatus.textContent = `✅ "${name}" carregado!`; fileStatus.style.color = '#90EE90'; }
+							pendingData = null;
+						}
+					}, 200);
+				});
+			}
+
+			// Botão: Voltar ao Mundo Procedural
+			const btnBack = document.getElementById('btn-back-to-world');
+			if (btnBack) {
+				btnBack.addEventListener('click', () => {
+					window.open('index_md_v6.1.html', '_blank');
+				});
+			}
+
+			// 1.3 — Resolução do terreno
+			const resSelect = document.getElementById('terrain-resolution');
+			if (resSelect) {
+				resSelect.addEventListener('change', () => {
+					const seg = parseInt(resSelect.value);
+					const tryApply = setInterval(() => {
+						if (window.builder && window.builder.terrain) {
+							clearInterval(tryApply);
+							window.builder.terrain.setResolution(seg);
+							window.builder.terrain.generate(window.builder.currentSeed || 12345);
+							console.log(`🔧 Resolução: ${seg}x${seg}`);
+						}
+					}, 200);
+				});
+			}
+		});
+	})();
+	</script>
+
+    <!-- ===================== MINIMAP DO BUILDER ===================== -->
+    <canvas id="builder-minimap"></canvas>
+    <style>
+        #builder-minimap {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width:  180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.35);
+            box-shadow: 0 0 12px rgba(0,0,0,0.6), inset 0 0 6px rgba(0,0,0,0.4);
+            background: #000;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.88;
+        }
+    </style>
+
+</body>
+</html>
