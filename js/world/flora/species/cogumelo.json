@@ -1,6 +1,2369 @@
 {
+  "textureRecipe": {
+    "textures": {
+      "primary": "wood",
+      "secondary": "clouds",
+      "blend": {
+        "mode": "overlay",
+        "amount": 0.75
+      }
+    },
+    "colors": [
+      "#867d2a",
+      "#a57c2e",
+      "#9aed3c",
+      "#d8db04"
+    ],
+    "colorMode": "gradient",
+    "parameters": {
+      "seed": 4389003,
+      "scale": 130,
+      "noiseAmount": 0.3,
+      "octaves": 4,
+      "contrast": 1.3,
+      "distortion": 0.5,
+      "blendMode": "overlay",
+      "blendAmount": 0.75,
+      "tiling": true
+    },
+    "effects": [
+      "sparks",
+      "cracks",
+      "glow"
+    ],
+    "renderMode": "texture",
+    "tiling": true
+  },
+  "customColors": [
+    "#4ecdc4",
+    "#b65e0c",
+    "#222f3e",
+    "#ffffff",
+    "#8b4513",
+    "#228b22",
+    "#d32a19",
+    "#b6f502",
+    "#f2a602",
+    "#f21818",
+    "#e11414",
+    "#e6e901",
+    "#f6efef",
+    "#0fc3bc",
+    "#e8ee11",
+    "#ab6151",
+    "#c27aab",
+    "#49f86c",
+    "#a6f3ec",
+    "#13eb0f",
+    "#f156f6",
+    "#3949d6",
+    "#ffe53a",
+    "#2b9079",
+    "#94ba25",
+    "#970364",
+    "#74a860",
+    "#867d2a",
+    "#a57c2e",
+    "#9aed3c",
+    "#d8db04",
+    "#eb0f0f",
+    "#d81616",
+    "#0c6bf0",
+    "#906dc3",
+    "#9c09fd",
+    "#ff0000",
+    "#ff00dd",
+    "#cc1e1e",
+    "#ff7b00",
+    "#fff700",
+    "#3ddb5d",
+    "#edcf0c",
+    "#758cff",
+    "#ffbb00",
+    "#a8fff5",
+    "#dfddf8",
+    "#f5db94"
+  ],
   "blocks": [
-    { "position": { "x": 0, "y": 0.1, "z": 0 }, "color": "#FFFFFF", "type": "cylinder", "scale": 0.2 },
-    { "position": { "x": 0, "y": 0.3, "z": 0 }, "color": "#FF0000", "type": "sphere", "scale": 0.5 }
+    {
+      "position": {
+        "x": 0,
+        "y": 0.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 1.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 2.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 3.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 4.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 5.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 6.5,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 1.5086105157217653,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 9,
+        "z": 0
+      },
+      "color": "#dfddf8",
+      "type": "cylinder",
+      "scale": {
+        "x": 1,
+        "y": 3.5135295434922647,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -6,
+        "y": 8.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 9.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 10.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 11.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 11.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 11.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 10.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -5,
+        "y": 9.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 10.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 11.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 12.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 12.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 12.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 12.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 12.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 11.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -4,
+        "y": 10.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 9.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 11.5,
+        "z": -4
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 12.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 12.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 12.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 12.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 11.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -3,
+        "y": 9.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 10.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 12.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 12.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 13.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 13.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 12.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 12.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -2,
+        "y": 10.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 11.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 12.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 13.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 12.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": -1,
+        "y": 11.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 8.5,
+        "z": -6
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 11.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 12.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 14.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 13.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 12.5,
+        "z": 4
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 11.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 0,
+        "y": 8.5,
+        "z": 6
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 11.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 12.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 13.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 12.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 11.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 10.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 12.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 12.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 13.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 13.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 12.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 12.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 2,
+        "y": 10.5,
+        "z": 5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 9.5,
+        "z": -5
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 11.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 12.5,
+        "z": -3
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 12.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 13.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 13.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 13.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 12.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 12.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 11.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 3,
+        "y": 9.5,
+        "z": 5
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 10.5,
+        "z": -4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 11.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 12.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 12.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 12.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 12.5,
+        "z": 1
+      },
+      "color": "#867d2a",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 12.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 11.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 4,
+        "y": 10.5,
+        "z": 4
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 9.5,
+        "z": -3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 10.5,
+        "z": -2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 11.5,
+        "z": -1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 11.5,
+        "z": 0
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 11.5,
+        "z": 1
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 10.5,
+        "z": 2
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    {
+      "position": {
+        "x": 5,
+        "y": 9.5,
+        "z": 3
+      },
+      "color": "#ff0000",
+      "type": "sphere",
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    }
   ]
 }
