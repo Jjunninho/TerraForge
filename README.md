@@ -1,128 +1,105 @@
-# TerraForge
-Mundo 3D Procedural
+# TerraForge — Mundo 3D Procedural
 
-[![Estado](https://img.shields.io/badge/status-alpha-orange)](https://github.com/Jjunninho/TerraForge) [![Linguagens](https://img.shields.io/github/languages/top/Jjunninho/TerraForge)](https://github.com/Jjunninho/TerraForge) [![Licença](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+Explore a geração procedural de terrenos 3D diretamente no navegador.
 
-Índice
-- Sobre
-- Demonstração
-- Principais funcionalidades
-- Tecnologias
-- Instalação
-- Como executar
-- Configuração e parâmetros
-- Desenvolvimento
-- Contribuindo
-- Roadmap
-- Créditos
-- Licença
-- Contato
+[**🚀 ACESSAR O TERRAFORGE — DEMONSTRAÇÃO ONLINE**](https://jjunninho.github.io/TerraForge/)
 
-## Sobre
-TerraForge é um projeto que gera mundos 3D de forma procedural usando tecnologias web (JavaScript/HTML/CSS). O objetivo é permitir exploração visual, experimentação com algoritmos de geração procedural (ruído, biomas, erosão, LOD) e servir como base para jogos, demos e ferramentas educativas.
+[![Status](https://img.shields.io/badge/status-alpha-orange)](https://github.com/Jjunninho/TerraForge)
+[![Linguagem principal](https://img.shields.io/github/languages/top/Jjunninho/TerraForge)](https://github.com/Jjunninho/TerraForge)
+[![Licença](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+## Sobre o projeto
+
+**TerraForge** é um projeto de geração procedural de mundos 3D desenvolvido com tecnologias web.
+
+O projeto explora técnicas de computação gráfica e algoritmos procedurais para criar terrenos virtuais, permitindo experimentar a geração de paisagens e os conceitos envolvidos na construção de ambientes tridimensionais.
+
+A proposta é disponibilizar uma experiência interativa que possa ser acessada diretamente pelo navegador, sem exigir que o usuário clone o repositório para experimentar a demonstração online.
 
 ## Demonstração
-> Coloque aqui um GIF ou screenshot do projeto (ex.: `/assets/demo.gif` ou um link para uma página hospedada).
 
-Se você tiver uma página hospedada (GitHub Pages), adicione o link aqui:
-https://github.com/Jjunninho/TerraForge
+**Experimente o projeto online:**
 
-## Principais funcionalidades
-- Geração procedural de terreno (Perlin / Simplex / Voronoi)
-- Sistema de biomas (áreas distintas por altitude/temperatura)
-- Controles de navegação (câmera livre / orbit)
-- Ajuste dinâmico de parâmetros (seed, escala, amplitude)
-- Otimizações de performance (meshes, LOD básico)
-- Exportação de screenshots / mapas de altura (opcional)
+🌎 **[https://jjunninho.github.io/TerraForge/](https://jjunninho.github.io/TerraForge/)**
+
+O código-fonte está disponível publicamente no GitHub:
+
+💻 [github.com/Jjunninho/TerraForge](https://github.com/Jjunninho/TerraForge)
 
 ## Tecnologias
-- JavaScript (ES6+)
-- HTML5 / Canvas / WebGL (ex.: three.js)
-- CSS para UI e controles
 
-> Observação: o repositório é majoritariamente JavaScript/HTML/CSS.
+O projeto utiliza tecnologias de desenvolvimento web, incluindo:
 
-## Instalação
-Clone o repositório:
+- **JavaScript** — lógica e processamento da aplicação.
+- **HTML5** — estrutura da interface.
+- **CSS** — apresentação visual e estilos.
+
+## Objetivos do projeto
+
+- Explorar técnicas de geração procedural de terrenos.
+- Experimentar algoritmos aplicados à criação de ambientes virtuais.
+- Investigar conceitos de computação gráfica e visualização 3D.
+- Desenvolver uma experiência interativa acessível pela web.
+
+## Executar localmente
+
+Caso queira explorar o código-fonte ou executar o projeto em seu computador, siga estas etapas.
+
+### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/Jjunninho/TerraForge.git
+```
+
+### 2. Entre na pasta do projeto
+
+```bash
 cd TerraForge
 ```
 
-Opções para rodar localmente:
-- Projeto estático (apenas abra `index.html` no navegador)
-- Servidor simples (recomendado para evitar problemas de CORS):
-  - Python 3:
-    ```bash
-    python -m http.server 8000
-    # então abra http://localhost:8000
-    ```
-  - Node (se houver `package.json` e scripts):
-    ```bash
-    npm install
-    npm start
-    # ou
-    npm run dev
-    ```
+### 3. Inicie um servidor local
 
-## Como executar
-1. Abra o navegador: `http://localhost:8000` (ou o endereço que o seu servidor fornecer).
-2. Use os controles na tela ou as teclas listadas na UI para navegar pelo mundo.
-3. Teste diferentes seeds e parâmetros para ver variações no terreno.
+Se o projeto puder ser executado como uma aplicação web estática, você pode utilizar o Python:
 
-## Configuração e parâmetros
-- `seed`: número inteiro para gerar mundos reproduzíveis.
-- `scale`: controla o nível de detalhe do ruído.
-- `amplitude`: altura máxima do terreno.
-- `octaves`, `persistence`, `lacunarity`: parâmetros do gerador de ruído.
+```bash
+python -m http.server 8000
+```
 
-Observação: caso exista um arquivo `config` ou objeto `settings.js`, documente aqui as chaves e exemplos de valores.
+Depois, abra o endereço abaixo no navegador:
 
-## Desenvolvimento
-- Estruture as features em módulos (gerador de ruído, gerador de malha, shader, UI).
-- Adicione testes manuais para performance (medir fps em terrenos grandes).
-- Se usar bundler (webpack, vite, parcel), inclua scripts `npm run build` e `npm run dev`.
+http://localhost:8000
 
-Sugestão de workflow:
-1. Crie uma branch: `git checkout -b feature/nova-funcionalidade`
-2. Faça commits pequenos e descritivos.
-3. Abra Pull Request com descrição e screenshots.
+> Se o projeto utilizar dependências ou ferramentas de compilação específicas, consulte os arquivos de configuração do repositório para obter as instruções adequadas.
 
-## Contribuindo
-Contribuições são bem-vindas! Por favor:
-- Abra uma issue antes de iniciar trabalho grande para discutirmos a abordagem.
-- Siga o padrão de commits (mensagens claras).
-- Adicione documentação e exemplos para qualquer nova funcionalidade.
-- Opcional: siga o padrão de código (prettier/eslint) se já estiver configurado.
+## Desenvolvimento futuro
 
-Modelo básico:
-- Fork → branch → commit → PR
+O projeto pode evoluir com novas funcionalidades e experimentos, como:
 
-## Roadmap
-- [ ] Suporte a múltiplos biomas mais detalhados
-- [ ] Efeitos atmosféricos (névoa, céu dinâmico)
-- [ ] Erosão e sedimentação simuladas
-- [ ] Exportar mapas de altura e normal maps
-- [ ] Versão mobile/otimização
+- Maior variedade de terrenos e biomas.
+- Melhorias na qualidade visual e na iluminação.
+- Otimizações para diferentes configurações de hardware.
+- Novas técnicas de geração procedural e simulação de paisagens.
 
-## Créditos
-- Inspirado por técnicas de geração procedural (Perlin/Simplex/Voronoi).
-- Biblioteca sugerida: three.js (se aplicável).
+As possibilidades acima representam ideias de evolução, não uma garantia de funcionalidades já implementadas.
+
+## Contribuições
+
+Sugestões, relatos de problemas e contribuições são bem-vindos.
+
+Para colaborar:
+
+1. Explore o projeto e o código-fonte.
+2. Registre sugestões ou problemas na seção [Issues](https://github.com/Jjunninho/TerraForge/issues).
+3. Para contribuir com código, faça um fork do repositório e envie um Pull Request.
 
 ## Licença
-Escolha uma licença para o projeto. Recomendo MIT para projetos open-source simples.
 
-Exemplo de nota de licença:
-Este projeto está licenciado sob a Licença MIT — veja o arquivo LICENSE para detalhes.
+Consulte o arquivo [LICENSE](LICENSE) para conhecer os termos de utilização, modificação e distribuição do código-fonte.
 
-## Contato
-Desenvolvedor: Jjunninho  
-GitHub: https://github.com/Jjunninho
+## Autor
 
----
+**Jjunninho**
 
-Se quiser que eu:
-- crie um arquivo LICENSE (ex.: MIT) e adicione automaticamente, posso fazer isso;
-- adicione screenshots/GIFs ao repositório e atualize o README para apontar para eles, envie as imagens ou caminhos;
-- escreva uma versão em inglês do README, eu também posso gerar e commitar.
+- GitHub: [github.com/Jjunninho](https://github.com/Jjunninho)
+- Projeto: [TerraForge — Demonstração online](https://jjunninho.github.io/TerraForge/)
+
